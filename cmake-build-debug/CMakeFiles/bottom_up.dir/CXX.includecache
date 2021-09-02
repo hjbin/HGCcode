@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/Graph_IO.h
+hcluster.h
+/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/hcluster.h
+iostream
+-
+sstream
+-
+
+/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/hcluster.h
+fstream
+-
+unordered_set
+-
+vector
+-
+queue
+-
+set
+-
+map
+-
+unordered_map
+-
+algorithm
+-
+
+/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/main.cpp
+iostream
+-
+Graph_IO.h
+/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/Graph_IO.h
+algorithm
+-
+math.h
+-
+

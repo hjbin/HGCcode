@@ -1,0 +1,3 @@
+/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/cmake-build-debug/CMakeFiles/bottom_up.dir

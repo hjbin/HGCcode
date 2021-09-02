@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="bottom_up"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Volumes/G-DRIVE\ mobile\ USB-C/coreProp/bottom_up/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Volumes/G-DRIVE\ mobile\ USB-C/coreProp/bottom_up/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Volumes/G-DRIVE\ mobile\ USB-C/coreProp/bottom_up/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Volumes/G-DRIVE\ mobile\ USB-C/coreProp/bottom_up/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Volumes/G-DRIVE\ mobile\ USB-C/coreProp/bottom_up/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Volumes/G-DRIVE\ mobile\ USB-C/coreProp/bottom_up/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Volumes/G-DRIVE\ mobile\ USB-C/coreProp/bottom_up/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Volumes/G-DRIVE\ mobile\ USB-C/coreProp/bottom_up/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Volumes/G-DRIVE\ mobile\ USB-C/coreProp/bottom_up/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Volumes/G-DRIVE\ mobile\ USB-C/coreProp/bottom_up/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Volumes/G-DRIVE\ mobile\ USB-C/coreProp/bottom_up/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Volumes/G-DRIVE\ mobile\ USB-C/coreProp/bottom_up/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="bottom_up">
+				<Option output="/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/cmake-build-debug/bottom_up" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/local/Cellar/gcc@7/7.5.0_1/lib/gcc/7/gcc/x86_64-apple-darwin19.2.0/7.5.0/../../../../../../include/c++/7.5.0"/>
+					<Add directory="/usr/local/Cellar/gcc@7/7.5.0_1/lib/gcc/7/gcc/x86_64-apple-darwin19.2.0/7.5.0/../../../../../../include/c++/7.5.0/x86_64-apple-darwin19.2.0"/>
+					<Add directory="/usr/local/Cellar/gcc@7/7.5.0_1/lib/gcc/7/gcc/x86_64-apple-darwin19.2.0/7.5.0/../../../../../../include/c++/7.5.0/backward"/>
+					<Add directory="/usr/local/Cellar/gcc@7/7.5.0_1/lib/gcc/7/gcc/x86_64-apple-darwin19.2.0/7.5.0/include"/>
+					<Add directory="/usr/local/Cellar/gcc@7/7.5.0_1/lib/gcc/7/gcc/x86_64-apple-darwin19.2.0/7.5.0/include-fixed"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Volumes/G-DRIVE\ mobile\ USB-C/coreProp/bottom_up/cmake-build-debug/Makefile&quot;  VERBOSE=1 bottom_up"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Volumes/G-DRIVE\ mobile\ USB-C/coreProp/bottom_up/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Volumes/G-DRIVE\ mobile\ USB-C/coreProp/bottom_up/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Volumes/G-DRIVE\ mobile\ USB-C/coreProp/bottom_up/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="bottom_up/fast">
+				<Option output="/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/cmake-build-debug/bottom_up" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/local/Cellar/gcc@7/7.5.0_1/lib/gcc/7/gcc/x86_64-apple-darwin19.2.0/7.5.0/../../../../../../include/c++/7.5.0"/>
+					<Add directory="/usr/local/Cellar/gcc@7/7.5.0_1/lib/gcc/7/gcc/x86_64-apple-darwin19.2.0/7.5.0/../../../../../../include/c++/7.5.0/x86_64-apple-darwin19.2.0"/>
+					<Add directory="/usr/local/Cellar/gcc@7/7.5.0_1/lib/gcc/7/gcc/x86_64-apple-darwin19.2.0/7.5.0/../../../../../../include/c++/7.5.0/backward"/>
+					<Add directory="/usr/local/Cellar/gcc@7/7.5.0_1/lib/gcc/7/gcc/x86_64-apple-darwin19.2.0/7.5.0/include"/>
+					<Add directory="/usr/local/Cellar/gcc@7/7.5.0_1/lib/gcc/7/gcc/x86_64-apple-darwin19.2.0/7.5.0/include-fixed"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Volumes/G-DRIVE\ mobile\ USB-C/coreProp/bottom_up/cmake-build-debug/Makefile&quot;  VERBOSE=1 bottom_up/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Volumes/G-DRIVE\ mobile\ USB-C/coreProp/bottom_up/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Volumes/G-DRIVE\ mobile\ USB-C/coreProp/bottom_up/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Volumes/G-DRIVE\ mobile\ USB-C/coreProp/bottom_up/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/Graph_IO.h">
+			<Option target="bottom_up"/>
+		</Unit>
+		<Unit filename="/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/hcluster.h">
+			<Option target="bottom_up"/>
+		</Unit>
+		<Unit filename="/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/main.cpp">
+			<Option target="bottom_up"/>
+		</Unit>
+		<Unit filename="/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
