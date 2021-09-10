@@ -2,6 +2,7 @@
 #include "Graph_IO.h"
 #include <algorithm>
 #include <math.h>
+#include <cstring>
 using namespace std;
 
 void bottom_up()
@@ -95,7 +96,7 @@ void bottom_up()
     total_t=total_t-otime/CLOCKS_PER_SEC;
     printf("Total Time: =%.3lf\n", total_t);
 
-//    outputHC();
+    outputHC();
 }
 
 void top_down_search()
@@ -126,15 +127,32 @@ void top_down_search()
     std::reverse(HC.begin(),HC.end());
 
 
-//    outputHC();
+    outputHC();
 
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc,char* argv[]) {
 
 
+    if (strcmp(argv[2], "skip") == 0){skip=true;}
     Readin_Graph(argv[1]);
-    vector<vector<int>> gtCom=Input_GTCom(argv[2]);
+
+    if (strcmp(argv[3],"hlp")==0)
+    {
+        hlp= true;
+        cout<<"HLP***********"<<endl;
+        bottom_up();
+    } else if (strcmp(argv[3],"bottom_up")==0)
+    {
+        hlp= false;
+        cout<<"Bottom Up Search**********"<<endl;
+        bottom_up();
+    } else{
+        cout<<"Top Down Search***********"<<endl;
+        top_down_search();
+    }
+
+//    vector<vector<int>> gtCom=Input_GTCom(argv[2]);
 //    for (int i = 0; i < 3; ++i) {
 //        for (int j = 0; j < gtCom[i].size(); ++j) {
 //            cout<<gtCom[i][j]<<" ";
@@ -143,9 +161,11 @@ int main(int argc, char* argv[]) {
 //    }
 //    Readin_Paris("data/.txt");
 //    outputHC();
-    bottom_up();
+//    bottom_up();
 //    top_down_search();
     fast_dasgupta();
+    hierarchical_gain();
+    average_modularity();
 //    hierarchical_fmeasure(gtCom);
 
 //    core_decompostion();

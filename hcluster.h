@@ -13,6 +13,7 @@
 #include <map>
 #include <unordered_map>
 #include <algorithm>
+#include "htree.h"
 
 using namespace std;
 
@@ -21,7 +22,8 @@ int iter_T=10;
 int Rand_Seed=10086;
 
 int *labels;
-
+bool skip= false;
+bool hlp=false;
 
 int maxcore=0;
 
@@ -31,6 +33,7 @@ vector<int> *core_bin;
 
 vector<vector<int>> Communities;
 vector<vector<vector<int>>> HC;
+vector<int> *com_hash;
 
 double iotime=0.0;
 
@@ -44,7 +47,7 @@ typedef struct endpoint
 
 vector <endpoint> *g;
 set<int> compset;
-int n, m, dmax, maxsup, maxtruss;
+int n, m, dmax;
 int Tsize,K;
 
 
@@ -57,31 +60,23 @@ bool* nodemap;
 
 unordered_set<int> sparseEdges;
 
-int test_num=0;
-//flag[x]=true, the score of v has been computed.
-bool *flag;
-//conp[x] as the score of x
-int *conp;
-int *mv;
+
 vector <endpoint> *inde;
 
 int *coreness;
-vector<int> qnodes;
-int *nodetruss;
 
-//the sum of Top-k values
-int total_comp =0;
+
+Node *root;
 
 set<int> removedEdges;
 
 typedef struct Edgetype
 {
-    int x, y,truss;
+    int x, y;
 }Edgetype;
 
 
 vector<Edgetype> eg;
-int *sup, *truss;
 
 map<int,vector<endpoint>> *t;
 
@@ -91,16 +86,6 @@ vector <int> *L;
 string graphname;
 
 bool *del;
-
-typedef struct Score
-{
-    int id;
-    int score;
-}Score;
-
-bool operator< (const Score& t1, const Score& t2) {
-    return t1.score > t2.score;
-}
 
 typedef struct Setree
 {
@@ -115,100 +100,6 @@ typedef struct SuperNode
     vector<int> nb;
     int coreness;
 }SuperNode;
-
-typedef struct AdvancedInde
-{
-    //vector<Edgetype> superedges;
-    map<int,SuperNode> supernodes;
-    map<int,vector<int>> nodebin;
-    map<int,vector<Edgetype>> edgebin;
-    int knmax;
-    int kmmax;
-    //vector<int> internal_nodes;
-}AdvancedInde;
-
-AdvancedInde *adi;
-
-
-typedef struct Index
-{
-    double upper_bound;
-    map <int, Setree> t;
-
-    int change;
-
-    void init(int id) {
-        t[0].father = 0;
-        t[0].rank = -1;
-        t[0].count = 0;
-        t[0].cost = 0;
-
-        for (int i=0; i<g[id].size(); i++)
-        {
-            int x = g[id][i].u;
-            t[x].father = x;
-            t[x].rank = 0;
-            t[x].count = 1;
-            t[x].cost = min(g[x].size(), g[id].size());
-        }
-
-    }
-
-    void initSubgraph(int nid){
-        t[0].father = 0;
-        t[0].rank = -1;
-        t[0].count = 0;
-        t[0].cost = 0;
-        for (int i = 1; i < nid; ++i) {
-            t[i].father = i;
-            t[i].rank = 0;
-            t[i].count = 1;
-            t[i].cost = 0;
-        }
-    }
-
-    int Find_Father(int x)
-    {
-        if (x != t[x].father)
-        {
-            t[x].father = Find_Father(t[x].father);
-            return t[x].father;
-        }
-        return t[x].father;
-    }
-    void Union(int x,int y)
-    {
-        int fx, fy;
-        fx = Find_Father(x);
-        fy = Find_Father(y);
-
-        if (fx == fy) return ;
-        if (t[fx].rank > t[fy].rank)
-        {
-            t[fy].father = fx;
-            t[fx].count += t[fy].count;
-            t[fx].cost += t[fy].cost;
-        }
-        else
-        {
-            t[fx].father = fy;
-            t[fy].count += t[fx].count;
-            t[fy].cost += t[fx].cost;
-
-            if (t[fx].rank == t[fy].rank)
-            {
-                t[fy].rank++;
-            }
-        }
-        change = 1;
-    }
-    void Single_Father(int x)
-    {
-        t[x].father = 0;
-        t[0].count++;
-        change = 1;
-    }
-}Index;
 
 int Random(int l, int r){srand(Rand_Seed); return rand() % (r - l + 1) + l;}
 
@@ -258,8 +149,11 @@ struct SuperGraph{
                     neighbor_core.push_back(core[nlist[j].nb[k]]);
                 }
                 if (nlist[j].nb.size()>0){
-                      labels[j]=now_label[j]=get_maxnum_in_vec(neighbor_labels);
-//                    labels[j]=now_label[j]=get_maxnum_in_vec_with_core(neighbor_labels,neighbor_core);
+                    if(hlp){
+                        labels[j]=now_label[j]=get_maxnum_in_vec(neighbor_labels);
+                    }else{
+                    labels[j]=now_label[j]=get_maxnum_in_vec_with_core(neighbor_labels,neighbor_core);
+                    }
                 }
             }
             if (pre_label==now_label) break;
@@ -420,8 +314,6 @@ struct SuperGraph{
 };
 
 
-//Union_Find_Isolate data structure(AB)
-Index *Set;
 
 
 
@@ -433,8 +325,6 @@ void core_decompostion()
     //cout<<g[vertex].size()<<endl;
 
     clock_t start_t, end_t;
-    maxsup = 0;
-    maxtruss = 0;
     L = new vector <int> [n+1];
 
 
@@ -764,23 +654,27 @@ void outputHC()
     for (int x = 0; x < HC.size(); ++x) {
         vector<vector<int>> Communities=HC[x];
         cout<<"Community Size: "<<Communities.size()<<endl;
-        cout<<"[";
-        for (int i = 0; i < Communities.size(); ++i) {
-            if (i==0){
-                cout<<"[";
-            } else{
-                cout<<",[";
-            }
-            for (int j = 0; j < Communities[i].size(); ++j) {
-                cout<<Communities[i][j];
-                if (j==Communities[i].size()-1){
-                    cout<<"]";
-                } else{
-                    cout<<",";
-                }
-            }
-        }
-        cout<<"]"<<endl;
+//        for (int k = 0; k < Communities.size(); ++k) {
+//            cout<<Communities[k].size()<<",";
+//        }
+//        cout<<endl;
+//        cout<<"[";
+//        for (int i = 0; i < Communities.size(); ++i) {
+//            if (i==0){
+//                cout<<"[";
+//            } else{
+//                cout<<",[";
+//            }
+//            for (int j = 0; j < Communities[i].size(); ++j) {
+//                cout<<Communities[i][j];
+//                if (j==Communities[i].size()-1){
+//                    cout<<"]";
+//                } else{
+//                    cout<<",";
+//                }
+//            }
+//        }
+//        cout<<"]"<<endl;
     }
 }
 
@@ -859,7 +753,7 @@ void top_down(){
                     {
                         continue;
                     }
-                    //neighbor_labels.push_back(pre_label[sgraph.g[j][k].u]);//sync
+//                    neighbor_labels.push_back(pre_label[j]);//sync
                     neighbor_labels.push_back(cur_label[y]);//async
                 }
                 if (neighbor_labels.size()>0){
@@ -1044,12 +938,44 @@ double F_k(int k,vector<int> C1,vector<vector<int>> C2)
     return max_fk;
 }
 
+double F_k_fast(int k,vector<int> C1,vector<vector<int>> gt)
+{
+    double max_fk=0.0;
+    unordered_set<int> s;
+    vector<vector<int >> C2;
+    for (int i = 0; i < C1.size(); ++i) {
+        int x=C1[i];
+        for (int j = 0; j < com_hash[x].size(); ++j) {
+            if (s.find(com_hash[x][j])!=s.end())
+            {
+                continue;
+            }
+            s.insert(com_hash[x][j]);
+            C2.push_back(gt[com_hash[x][j]]);
+        }
+    }
+
+
+    for (int i = 0; i < C2.size(); ++i) {
+        vector<int> cstar=C2[i];
+        vector<int> inter=set_intersect(C1,cstar);
+        double precision=(double)inter.size()/C1.size();
+        double recall=(double)inter.size()/cstar.size();
+        double Fk=(k+1)*precision*recall/(k*precision+recall);
+        if (max_fk<Fk)
+        {
+            max_fk=Fk;
+        }
+    }
+    return max_fk;
+}
+
 void hierarchical_fmeasure(vector<vector<int>> gtCom)
 {
     cout<<"gt com size: "<<gtCom.size()<<endl;
     int hsum=(1+HC.size())*HC.size()/2;
     double total_fk=0.0;
-    for (int i = 1; i < HC.size(); ++i) {
+    for (int i = 0; i < HC.size(); ++i) {
 
         int layer=HC.size()-i;
         cout<<"fscore layer "<<layer<<endl;
@@ -1058,14 +984,67 @@ void hierarchical_fmeasure(vector<vector<int>> gtCom)
         for (int j = 0; j < HC[i].size(); ++j) {
             vector<int> C=HC[i][j];
             sort(C.begin(),C.end());
-            layer_fk+=alpha*(F_k(1,C,gtCom)/HC[i].size());
+            layer_fk+=alpha*(F_k_fast(1,C,gtCom)/HC[i].size());
         }
-        total_fk+=layer_fk/(HC.size()-1);
+        total_fk+=layer_fk/(HC.size());
     }
     cout<<"Hierarchical Fmeasure: "<<total_fk<<endl;
 }
 
+void hierarchical_gain()
+{
+    double total=0.0;
+    for (int i = 0; i < HC.size()-1; ++i) {
+        double increase=(double)HC[i].size()-HC[i+1].size();
+//        cout<<increase<<endl;
+        total+=increase;
+    }
+    cout<<"Average Community Quantity Increase: "<<total/HC.size()<<endl;
+}
 
+void average_modularity()
+{
+    double total_mod=0.0;
+    for (int i = 0; i < HC.size(); ++i) {
+        vector<vector<int>> H=HC[i];
+        double mod=0.0;
+
+        for (int j = 0; j < H.size(); ++j) {
+            vector<int> cur_com=H[j];//process by community
+            unordered_set<int> V;
+            for (int k = 0; k < cur_com.size(); ++k) {//construct a vertex mapping
+                V.insert(cur_com[k]);
+            }
+
+            int in_count=0;
+            int out_count=0;
+            for (int l = 0; l < cur_com.size(); ++l) {//bfs to count edge number
+                int u=cur_com[l];
+                out_count+=g[u].size();
+                for (int k = 0; k < g[u].size(); ++k) {
+                    int v=g[u][k].u;
+                    if (V.find(v)!=V.end())//inner edge
+                    {
+                        if (v>u)
+                        {
+                            in_count++;//count once
+//                            out_count++;
+                        }
+                    } else{//out edge
+//                        out_count++;
+                    }
+                }
+            }
+            double eii=(double)in_count/m*2;
+            double ai=(double) out_count/m;
+            mod+=eii-ai*ai;
+        }
+        cout<<"modularity of level "<<i<<": "<<mod<<endl;
+        total_mod+=mod;
+    }
+
+    cout<<"average modularity: "<<total_mod/HC.size()<<endl;
+}
 
 
 

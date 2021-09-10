@@ -3,5 +3,6 @@
 
 CMakeFiles/bottom_up.dir/main.cpp.o: ../Graph_IO.h
 CMakeFiles/bottom_up.dir/main.cpp.o: ../hcluster.h
+CMakeFiles/bottom_up.dir/main.cpp.o: ../htree.h
 CMakeFiles/bottom_up.dir/main.cpp.o: ../main.cpp
 

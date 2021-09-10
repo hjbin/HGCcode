@@ -88,6 +88,9 @@
 		<Unit filename="/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/hcluster.h">
 			<Option target="bottom_up"/>
 		</Unit>
+		<Unit filename="/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/htree.h">
+			<Option target="bottom_up"/>
+		</Unit>
 		<Unit filename="/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/main.cpp">
 			<Option target="bottom_up"/>
 		</Unit>

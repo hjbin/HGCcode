@@ -31,6 +31,12 @@ unordered_map
 -
 algorithm
 -
+htree.h
+/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/htree.h
+
+/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/htree.h
+vector
+-
 
 /Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/main.cpp
 iostream
@@ -40,5 +46,7 @@ Graph_IO.h
 algorithm
 -
 math.h
+-
+cstring
 -
 

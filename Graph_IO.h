@@ -15,7 +15,11 @@ void Readin_Graph(char *str)
     int linecount=0;
     FILE *fin = fopen(str, "r");
     int x, y, z;
-    fscanf(fin, "%d %d", &x, &y);//skip the first line;
+    if (skip)
+    {
+        cout<<"skip first line of input."<<endl;
+        fscanf(fin, "%d %d", &x, &y);//skip the first line;
+    }
 
     n = m = 0;
     dmax = 0;
@@ -34,7 +38,11 @@ void Readin_Graph(char *str)
 
     //Vertex id starting from 1.
     fin = fopen(str, "r");
-    fscanf(fin, "%d %d", &x, &y);//skip the first line;
+    if (skip)
+    {
+
+        fscanf(fin, "%d %d", &x, &y);//skip the first line;
+    }
     endpoint a, b;
     Edgetype e;
     int eid = 0;
@@ -246,6 +254,7 @@ vector<vector<int>> Input_GTCom(char *str)
     ifstream myfile;
     myfile.open (str);
     vector<vector<int>> gtComs;
+    com_hash=new vector<int>[n];
     while (std::getline(myfile, line))
     {
         std::istringstream iss(line);
@@ -254,12 +263,15 @@ vector<vector<int>> Input_GTCom(char *str)
         while (iss>>a)
         {
             gt_com.push_back(a);
+            com_hash[a].push_back(gtComs.size());
         }
-        if (gt_com.size()>3)
-        {
-            sort(gt_com.begin(),gt_com.end());
-            gtComs.push_back(gt_com);
-        }
+        sort(gt_com.begin(),gt_com.end());
+        gtComs.push_back(gt_com);
+//        if (gt_com.size()>3)
+//        {
+//            sort(gt_com.begin(),gt_com.end());
+//            gtComs.push_back(gt_com);
+//        }
 
     }
     return gtComs;
