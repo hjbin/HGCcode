@@ -49,4 +49,5 @@ double communitySizeIncrease(Node *root)
     double avgInc=(double)sizeInc/level;
     return avgInc;
 }
+
 #endif //BOTTOM_UP_HTREE_H

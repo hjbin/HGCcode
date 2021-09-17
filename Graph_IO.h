@@ -1,4 +1,5 @@
 #include "hcluster.h"
+#include "Utils.h"
 #include <iostream>
 #include <sstream>
 using namespace std;
@@ -247,6 +248,22 @@ void Readin_Paris_GT(char *str)
 //    printf("dasgupta_cost: %f\n", dasgupta_cost/(ncount*eg.size()));
 }
 
+
+Dendrogram Input_Dendrogram(char *str)
+{
+    FILE *fin = fopen(str, "r");
+    int x,y;
+    Dendrogram d;
+    while(fscanf(fin, "%d %d", &x, &y)!=EOF)
+    {
+        Merge me;
+        me.x=x;
+        me.y=y;
+        d.e.push_back(me);
+    }
+
+    return d;
+}
 
 vector<vector<int>> Input_GTCom(char *str)
 {

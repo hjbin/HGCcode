@@ -131,6 +131,8 @@ void top_down_search()
 
 }
 
+
+
 int main(int argc,char* argv[]) {
 
 
@@ -147,9 +149,14 @@ int main(int argc,char* argv[]) {
         hlp= false;
         cout<<"Bottom Up Search**********"<<endl;
         bottom_up();
-    } else{
+    } else if (strcmp(argv[3],"top_down")==0){
         cout<<"Top Down Search***********"<<endl;
         top_down_search();
+    } else if(strcmp(argv[3],"eval_den")==0)
+    {
+        Dendrogram d=Input_Dendrogram(argv[4]);
+        modularity_by_dendrogram(d);
+        return 0;
     }
 
 //    vector<vector<int>> gtCom=Input_GTCom(argv[2]);

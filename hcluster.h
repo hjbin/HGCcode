@@ -994,12 +994,14 @@ void hierarchical_fmeasure(vector<vector<int>> gtCom)
 void hierarchical_gain()
 {
     double total=0.0;
-    for (int i = 0; i < HC.size()-1; ++i) {
+    int layer=0;
+    for (int i = 1; i < HC.size()-2; ++i) {
         double increase=(double)HC[i].size()-HC[i+1].size();
+        layer++;
 //        cout<<increase<<endl;
         total+=increase;
     }
-    cout<<"Average Community Quantity Increase: "<<total/HC.size()<<endl;
+    cout<<"Average Community Quantity Increase: "<<total/layer<<endl;
 }
 
 void average_modularity()
