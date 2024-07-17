@@ -82,7 +82,13 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/DisjointSet.h">
+			<Option target="bottom_up"/>
+		</Unit>
 		<Unit filename="/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/Graph_IO.h">
+			<Option target="bottom_up"/>
+		</Unit>
+		<Unit filename="/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/Utils.h">
 			<Option target="bottom_up"/>
 		</Unit>
 		<Unit filename="/Volumes/G-DRIVE mobile USB-C/coreProp/bottom_up/hcluster.h">
