@@ -870,6 +870,47 @@ void fast_dasgupta()
 
 }
 
+void lca_cost(int L=1)
+{
+    int *interlabels=new int[n];
+    int *lcs=new int[eg.size()];
+    double lca_cost=0.0;
+    int ncount=0;
+    for (int k = 0; k < n; ++k) {
+        interlabels[k]=-1;
+        if (nodemap[k])
+        {
+            ncount++;
+        }
+    }
+    for (int i = HC.size()-1; i >=0 ; --i) {
+        vector<vector<int>> comm=HC[i];
+        for (int j = 0; j < comm.size(); ++j) {//assign labels for nodes in one community layer
+            vector<int> single_com=comm[j];
+            for (int k = 0; k < single_com.size(); ++k) {
+                interlabels[single_com[k]]=j;
+            }
+        }
+        //Process by edge
+        for (int l = 0; l < eg.size(); ++l) {
+            Edgetype edg=eg[l];
+            int x=edg.x;
+            int y=edg.y;
+            if (interlabels[x]==interlabels[y])
+            {
+                lcs[l]=i;
+            }
+        }
+    }
+
+    for (int k = 0; k < eg.size(); ++k) {
+        lca_cost+=(double)lcs[k];
+    }
+    //cout<<"edge:"<<m<<" "<<eg.size()<<"\n";
+    printf("lca_cost: %f\n", lca_cost/eg.size()/HC.size());
+
+}
+
 
 
 

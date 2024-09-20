@@ -170,9 +170,10 @@ int main(int argc,char* argv[]) {
 //    outputHC();
 //    bottom_up();
 //    top_down_search();
+    lca_cost();
     fast_dasgupta();
     hierarchical_gain();
-    average_modularity();
+//    average_modularity();
 //    hierarchical_fmeasure(gtCom);
 
 //    core_decompostion();
